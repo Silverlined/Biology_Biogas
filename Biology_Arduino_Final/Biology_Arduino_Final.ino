@@ -1,5 +1,3 @@
-#include<ArduinoJson.h>
-
 const int  buttonPin = 7;    // the pin that the pushbutton is attached to
 const int  buttonPin2 = 6;    // the pin that the pushbutton is attached to
 const long waitDebounce = 1000;  // waitDebounce agengst bounce
@@ -113,19 +111,17 @@ void loop() {
 void sendToSerial(float voltage) {
   // Sending pH sensor reading
   pH = (-0.01926 * voltage + 15.50);
-  Serial.println(pH);
+  Serial.print(pH);
+  Serial.print(",");
 
   // Sending temperature sensor reading
   temperature = (abstemp_cma(analogRead(sensorTemp)) / 10);
-  Serial.println(temperature);
+  Serial.print(temperature);
 
   // Sending volume of gas produced
-  Serial.println(counterOne * volumeGas);
+  Serial.print(",");
+  Serial.print(counterOne * volumeGas);
 
+  Serial.print(",");
   Serial.println(counterTwo * volumeGas);
 }
-
-void createJson(){
-  DynamicJsonDocument doc(256);
-}
-
